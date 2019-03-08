@@ -59,49 +59,44 @@ def step(content,rules):
 
 
 def main():
-    rules = []
-    rules = get_rules_from_file()
-    user_is_smart = False
-    print(rules)
-    while user_is_smart == False:
-        user_choose = menu()
-        if user_choose == '1':
-            content = make_content_from_file("random_like_init.txt")
-        elif user_choose == '2':
-            content = make_content_from_file("glider.txt")
-        elif user_choose == '3':
-            content = make_content_from_file("stable_configurations.txt")
-        elif user_choose == '4':
-            content = make_content_from_file("glider_gun.txt")
-        elif user_choose == '5':
-            filename = input("Insert path here:")
-            content = make_content_from_file(filename)
-        else:
-            print('Think again!')
-            continue
-        user_is_smart = True
+    while True:
+        rules = []
+        rules = get_rules_from_file()
+        user_is_smart = False
+        print(rules)
+        while user_is_smart == False:
+            user_choose = menu()
+            if user_choose == '1':
+                content = make_content_from_file("random_like_init.txt")
+            elif user_choose == '2':
+                content = make_content_from_file("glider.txt")
+            elif user_choose == '3':
+                content = make_content_from_file("stable_configurations.txt")
+            elif user_choose == '4':
+                content = make_content_from_file("glider_gun.txt")
+            elif user_choose == '5':
+                filename = input("Insert path here:")
+                content = make_content_from_file(filename)
+            else:
+                print('Think again!')
+                continue
+            user_is_smart = True
 
-    display(content)
-    input('Press enter to start!')
-    run = True
-    while run:
         display(content)
-        time.sleep(.1)
-        # if getch.getch():
-        #	run = False
-        #	print('paused')
-        content = step(content,rules)
-        clear()
+        input('Press enter to start!')
+        run = True
+        while run:
+            try:
+                display(content)
+                time.sleep(.1)
+                content = step(content,rules)
+                clear()
+            except KeyboardInterrupt:
+                break
+
 
 
 if __name__ == "__main__":
     main()
 
-    # if row_list[j] == '0' and living_neighbours < 2:
-    #    new_rowlist[j] = '_'
-    # elif row_list[j] == '0' and 2 <= living_neighbours <= 3:
-    #    new_rowlist[j] = '0'
-    # elif row_list[j] == '0' and living_neighbours > 3:
-    #    new_rowlist[j] = '_'
-    # elif row_list[j] == '_' and living_neighbours == 3:
-    #    new_rowlist[j] = '0'
+
